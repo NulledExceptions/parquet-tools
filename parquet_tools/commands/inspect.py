@@ -96,10 +96,8 @@ def _simple_schema_expression(file_meta, schema) -> str:
             col_compression_space_saving_pct_str = f"{col_compression_space_saving_pct:.0f}%"
         else:
             col_compression_space_saving_pct_str = 'N/A'
-        col_compression = f"{col_meta.compression} (space_saved: {col_compression_space_saving_pct_str})"
-        exp += dedent(f'''
-        {col.name},{col_compression.split(' ')[0]}
-        ''')
+        col_compression = f"{col_meta.compression})"
+        exp += dedent(f'{col.name},{col_meta.compression}')
 
     return exp
 
