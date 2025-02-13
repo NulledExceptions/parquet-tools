@@ -103,6 +103,7 @@ def _simple_schema_expression(file_meta, schema) -> str:
 
     return exp
 def get_column_compression(file_meta, schema) -> dict:
+    columns: List[str] = schema.names
     column_compression = {}
     for i, column in enumerate(columns):
         col = schema.column(i)
