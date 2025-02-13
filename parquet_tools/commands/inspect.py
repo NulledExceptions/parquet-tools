@@ -62,6 +62,8 @@ def _cli(args: Namespace) -> None:
 def _execute_simple(filename: str) -> None:
     pq_file: pq.ParquetFile = pq.ParquetFile(filename)
     file_meta: pq.FileMetaData = pq_file.metadata
+    print(file_meta)
+    print(file_schema)
     print(_simple_meta_expression(file_meta))
     file_schema: pq.ParquetSchema = pq_file.schema
     print(_simple_schema_expression(file_meta, file_schema))
