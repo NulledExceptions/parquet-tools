@@ -98,15 +98,7 @@ def _simple_schema_expression(file_meta, schema) -> str:
             col_compression_space_saving_pct_str = 'N/A'
         col_compression = f"{col_meta.compression} (space_saved: {col_compression_space_saving_pct_str})"
         exp += dedent(f'''
-        ############ Column({column}) ############
-        name: {col.name}
-        path: {col.path}
-        max_definition_level: {col.max_definition_level}
-        max_repetition_level: {col.max_repetition_level}
-        physical_type: {col.physical_type}
-        logical_type: {col.logical_type}
-        converted_type (legacy): {col.converted_type}
-        compression: {col_compression}
+        {col.name},{col_compression}
         ''')
 
     return exp
