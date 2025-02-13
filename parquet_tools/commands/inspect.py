@@ -62,11 +62,10 @@ def _cli(args: Namespace) -> None:
 def _execute_simple(filename: str) -> None:
     pq_file: pq.ParquetFile = pq.ParquetFile(filename)
     file_meta: pq.FileMetaData = pq_file.metadata
-    print(file_meta)
-    print(file_schema)
-    print(_simple_meta_expression(file_meta))
+    # print(_simple_meta_expression(file_meta))
     file_schema: pq.ParquetSchema = pq_file.schema
-    print(_simple_schema_expression(file_meta, file_schema))
+    # print(_simple_schema_expression(file_meta, file_schema))
+    print(get_column_compression(file_meta, file_schema))
 
 
 def _simple_meta_expression(file_meta: pq.FileMetaData) -> str:
@@ -103,7 +102,14 @@ def _simple_schema_expression(file_meta, schema) -> str:
         ''')
 
     return exp
+def get_column_compression(file_meta, schema) -> dict:
+    column_compression = {}
+    for i, column in enumerate(columns):
+        col = schema.column(i)
+        col_meta = file_meta.row_group(0).column(i)
+        column_compression[col] = col_meta.compression
 
+    return column_compression
 
 def _execute_detail(filename: str) -> None:
     print(_obj_to_string(get_filemetadata(filename), sys.stdout.isatty()))
