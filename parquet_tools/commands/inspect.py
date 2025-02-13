@@ -108,7 +108,7 @@ def get_column_compression(file_meta, schema) -> dict:
     for i, column in enumerate(columns):
         col = schema.column(i)
         col_meta = file_meta.row_group(0).column(i)
-        column_compression[col] = col_meta.compression
+        column_compression[str(col.name)] = str(col_meta.compression)
 
     return column_compression
 
